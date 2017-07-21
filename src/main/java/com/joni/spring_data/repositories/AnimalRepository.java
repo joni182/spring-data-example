@@ -9,13 +9,7 @@ import com.joni.spring_data.entities.Animals;
 import com.joni.spring_data.entities.Animals;
 
 @Repository
-public interface AnimalRepository extends JpaRepository<Animals,String> {
+public interface AnimalRepository extends JpaRepository<Animals,Long> {
 
-	Animals findOne(String arg0);
-	List<Animals> findAll();
-	
-	<S extends Animals> S save(S arg0);
-	<S extends Animals> List<S> save(Iterable<S> arg0);
-	
-	long count();
+
 }
