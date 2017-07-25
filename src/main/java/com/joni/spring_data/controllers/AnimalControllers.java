@@ -3,6 +3,8 @@ package com.joni.spring_data.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,12 +35,12 @@ public class AnimalControllers {
 		
 	}
 	
-	@RequestMapping(value="", method=RequestMethod.PUT)
-	public Animals updateAnimals(@RequestBody Animals animal){
+	@RequestMapping(method=RequestMethod.PUT, value = "/{animalsId}")
+	public Animals updateAnimals(@PathVariable("animalsId") Long animalsId,@RequestBody Animals animal){
 		
-		if (animal != null && animalRepository.exists(animal.getId_animals())){
+		if (animal != null && animalRepository.exists(animalsId)){
 			
-			Animals oldAnimal = animalRepository.findOne(animal.getId_animals());
+			Animals oldAnimal = animalRepository.findOne(animalsId);
 			
 			oldAnimal.setName(animal.getName());
 			oldAnimal.setBirth(animal.getBirth());
@@ -54,10 +56,10 @@ public class AnimalControllers {
 		
 	}
 	
-	@RequestMapping(value="/find_animals", method=RequestMethod.GET, params="id")
-	public Animals getAnimals(@RequestParam Long id){
+	@RequestMapping(method = RequestMethod.GET, value = "/{animalsId}")
+	public Animals readAnimals(@PathVariable("animalsId") Long animalsId){
 		
-		return animalRepository.findOne(id);
+		return animalRepository.findOne(animalsId);
 		
 	}
 	
